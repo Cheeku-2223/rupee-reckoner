@@ -1,3 +1,6 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -96,6 +99,39 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-gray-50 text-foreground font-sans;
   }
+}
+
+.loan-card {
+  background: linear-gradient(145deg, #ffffff, #f5f7fa);
+  box-shadow: 0 10px 25px rgba(94, 53, 177, 0.08);
+}
+
+.loan-input {
+  @apply rounded-md border border-gray-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary transition-all duration-200;
+}
+
+.rupee-input {
+  @apply pl-8 relative;
+}
+
+.rupee-icon {
+  @apply absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500;
+}
+
+.results-card {
+  transition: all 0.3s ease;
+}
+
+.results-card:hover {
+  transform: translateY(-5px);
+}
+
+.pie-segment {
+  transition: all 0.3s ease-out;
+}
+
+.pie-segment:hover {
+  transform: scale(1.05);
 }
