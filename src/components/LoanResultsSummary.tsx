@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { Card } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from 'recharts';
 import { formatCurrency } from '@/utils/loanCalculations';
 
@@ -29,33 +28,33 @@ const LoanResultsSummary: React.FC<LoanResultsSummaryProps> = ({
   const COLORS = ['#5E35B1', '#9575CD'];
 
   return (
-    <div className="space-y-6 animate-fade-in">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <Card className="results-card p-5 rounded-xl bg-white shadow-md">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Monthly Payment</h3>
-          <p className="text-2xl font-bold text-primary">{formatCurrency(monthlyPayment)}</p>
-        </Card>
+    <div className="results-summary fade-in">
+      <div className="results-grid">
+        <div className="result-card">
+          <h3 className="result-label">Monthly Payment</h3>
+          <p className="result-value">{formatCurrency(monthlyPayment)}</p>
+        </div>
         
-        <Card className="results-card p-5 rounded-xl bg-white shadow-md">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Total Principal</h3>
-          <p className="text-2xl font-bold">{formatCurrency(loanAmount)}</p>
-        </Card>
+        <div className="result-card">
+          <h3 className="result-label">Total Principal</h3>
+          <p className="result-value normal">{formatCurrency(loanAmount)}</p>
+        </div>
         
-        <Card className="results-card p-5 rounded-xl bg-white shadow-md">
-          <h3 className="text-sm font-medium text-gray-500 mb-2">Total Interest</h3>
-          <p className="text-2xl font-bold text-purple-600">{formatCurrency(totalInterest)}</p>
-          <p className="text-xs text-gray-500 mt-1">
+        <div className="result-card">
+          <h3 className="result-label">Total Interest</h3>
+          <p className="result-value purple">{formatCurrency(totalInterest)}</p>
+          <p className="result-note">
             {(totalInterest / loanAmount * 100).toFixed(1)}% of principal
           </p>
-        </Card>
+        </div>
       </div>
 
-      <Card className="results-card p-6 rounded-xl bg-white shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Payment Breakdown</h3>
+      <div className="breakdown-card">
+        <h3 className="breakdown-title">Payment Breakdown</h3>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div>
-            <ResponsiveContainer width="100%" height={200}>
+        <div className="breakdown-content">
+          <div className="chart-container">
+            <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={data}
@@ -65,7 +64,6 @@ const LoanResultsSummary: React.FC<LoanResultsSummaryProps> = ({
                   outerRadius={80}
                   paddingAngle={2}
                   dataKey="value"
-                  className="pie-segment"
                 >
                   {data.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
@@ -76,46 +74,46 @@ const LoanResultsSummary: React.FC<LoanResultsSummaryProps> = ({
             </ResponsiveContainer>
           </div>
           
-          <div className="flex flex-col justify-center">
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="w-3 h-3 rounded-full bg-primary mr-2"></div>
-                  <span>Principal</span>
-                </div>
-                <span className="font-medium">{formatCurrency(loanAmount)}</span>
+          <div className="breakdown-legend">
+            <div className="legend-item">
+              <div className="legend-label">
+                <div className="legend-color primary"></div>
+                <span>Principal</span>
               </div>
-              
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
-                  <div className="w-3 h-3 rounded-full bg-purple-400 mr-2"></div>
-                  <span>Interest</span>
-                </div>
-                <span className="font-medium">{formatCurrency(totalInterest)}</span>
+              <span className="legend-value">{formatCurrency(loanAmount)}</span>
+            </div>
+            
+            <div className="legend-item">
+              <div className="legend-label">
+                <div className="legend-color secondary"></div>
+                <span>Interest</span>
               </div>
-              
-              <div className="flex items-center justify-between border-t pt-3 mt-2">
-                <div className="flex items-center">
-                  <div className="w-3 h-3 rounded-full bg-gradient-to-r from-primary to-purple-400 mr-2"></div>
-                  <span className="font-semibold">Total</span>
-                </div>
-                <span className="font-bold">{formatCurrency(totalPayment)}</span>
+              <span className="legend-value">{formatCurrency(totalInterest)}</span>
+            </div>
+            
+            <div className="legend-divider"></div>
+            
+            <div className="legend-item">
+              <div className="legend-label">
+                <div className="legend-color total"></div>
+                <span className="font-semibold">Total</span>
               </div>
+              <span className="legend-value font-bold">{formatCurrency(totalPayment)}</span>
             </div>
           </div>
         </div>
-      </Card>
+      </div>
 
-      <Card className="p-5 rounded-xl bg-gradient-to-r from-primary-50 to-purple-50 border-l-4 border-primary">
-        <div className="text-sm text-gray-700">
-          <p className="mb-2">
+      <div className="summary-card">
+        <div className="summary-text">
+          <p>
             A {loanTerm / 12} year loan of {formatCurrency(loanAmount)} at {interestRate}% interest will result in a monthly payment of {formatCurrency(monthlyPayment)}.
           </p>
           <p>
             After paying off the loan, you will have paid {formatCurrency(totalInterest)} in interest, which is {(totalInterest / loanAmount * 100).toFixed(1)}% of your original loan amount.
           </p>
         </div>
-      </Card>
+      </div>
     </div>
   );
 };

@@ -1,14 +1,5 @@
 
 import React, { useState } from 'react';
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from "@/components/ui/table";
-import { Card } from "@/components/ui/card";
 import { Pagination } from '@/components/Pagination';
 import { generateAmortizationSchedule, formatCurrency, LoanDetails } from '@/utils/loanCalculations';
 import { Info } from 'lucide-react';
@@ -30,47 +21,47 @@ const LoanAmortizationTable: React.FC<LoanAmortizationTableProps> = ({ loanDetai
   );
 
   return (
-    <Card className="overflow-hidden rounded-xl animate-fade-in">
-      <div className="p-4 bg-gray-50 border-b flex items-center gap-2">
-        <Info size={16} className="text-primary" />
-        <p className="text-sm text-gray-600">
+    <div className="amortization-table">
+      <div className="table-header">
+        <Info size={16} />
+        <p className="table-header-text">
           Monthly breakdown showing how each payment is applied to principal and interest
         </p>
       </div>
       
-      <div className="overflow-x-auto">
-        <Table>
-          <TableHeader>
-            <TableRow className="bg-gray-50">
-              <TableHead className="font-medium">Month</TableHead>
-              <TableHead className="font-medium text-right">Payment</TableHead>
-              <TableHead className="font-medium text-right">Principal</TableHead>
-              <TableHead className="font-medium text-right">Interest</TableHead>
-              <TableHead className="font-medium text-right">Balance</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
+      <div className="table-container">
+        <table className="table">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th className="right">Payment</th>
+              <th className="right">Principal</th>
+              <th className="right">Interest</th>
+              <th className="right">Balance</th>
+            </tr>
+          </thead>
+          <tbody>
             {currentPageData.map((entry) => (
-              <TableRow key={entry.month} className="hover:bg-gray-50">
-                <TableCell className="font-medium">{entry.month}</TableCell>
-                <TableCell className="text-right">{formatCurrency(entry.payment)}</TableCell>
-                <TableCell className="text-right">{formatCurrency(entry.principal)}</TableCell>
-                <TableCell className="text-right text-purple-600">{formatCurrency(entry.interest)}</TableCell>
-                <TableCell className="text-right">{formatCurrency(entry.balance)}</TableCell>
-              </TableRow>
+              <tr key={entry.month}>
+                <td className="font-medium">{entry.month}</td>
+                <td className="right">{formatCurrency(entry.payment)}</td>
+                <td className="right">{formatCurrency(entry.principal)}</td>
+                <td className="right interest">{formatCurrency(entry.interest)}</td>
+                <td className="right">{formatCurrency(entry.balance)}</td>
+              </tr>
             ))}
-          </TableBody>
-        </Table>
+          </tbody>
+        </table>
       </div>
       
-      <div className="p-4 border-t bg-white">
+      <div className="table-footer">
         <Pagination 
           currentPage={currentPage} 
           totalPages={totalPages} 
           onPageChange={setCurrentPage} 
         />
       </div>
-    </Card>
+    </div>
   );
 };
 

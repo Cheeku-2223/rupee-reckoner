@@ -1,0 +1,69 @@
+
+.amortization-table {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.table-header {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.table-header svg {
+  color: var(--color-primary);
+}
+
+.table-header-text {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.table-container {
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th {
+  background-color: #f9f9f9;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table th.right {
+  text-align: right;
+}
+
+.table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.table td.right {
+  text-align: right;
+}
+
+.table td.interest {
+  color: #9575CD;
+}
+
+.table tr:hover {
+  background-color: #f9f9f9;
+}
+
+.table-footer {
+  padding: 1rem;
+  background-color: white;
+  border-top: 1px solid var(--color-border);
+}

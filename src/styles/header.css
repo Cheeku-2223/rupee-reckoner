@@ -1,0 +1,43 @@
+
+.header {
+  padding: 1.5rem 0;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.header-logo-icon {
+  background-color: var(--color-primary);
+  padding: 0.75rem;
+  border-radius: 50%;
+  box-shadow: var(--shadow-md);
+}
+
+.header-logo-icon svg {
+  color: white;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.header-title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  background: linear-gradient(to right, var(--color-primary), #9b59b6);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 0;
+}
+
+.header-subtitle {
+  color: var(--color-text-secondary);
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
